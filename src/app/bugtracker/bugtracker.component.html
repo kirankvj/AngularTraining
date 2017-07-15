@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Bug Tracker</title>
+	</head>
+	<body>
+		<h1>Bug Tracker</h1>
+		<hr>
+		<div class="content">
+			<bug-stats [data]="bugs"></bug-stats>
+			<section class="sort">
+				<label>Order By :</label>
+				<select name="" id="">
+					<option value="">Name</option>
+					<option value="">Status</option>
+				</select>
+				<label for="">Descending ? :</label>
+				<input type="checkbox" name="" id="">
+			</section>
+			<section class="edit">
+				<label for="">New Bug :</label>
+				<input type="text" name="" id="" #txtCreate>
+				<input type="button" value="Create" (click)="onCreateClick(txtCreate.value)">
+			</section>
+			<section class="list">
+				<ol>
+					<li *ngFor="let bug of bugs">
+						<span class="bugname" (click)="onBugClick(bug)" [ngClass] = "{closed : bug.isClosed}">{{bug.name | trimText}}</span>
+						<div class="datetime">[Created At]</div>
+					</li>
+				</ol>
+				<input type="button" (click)="onRemoveClosed()" value="Remove Closed">
+			</section>
+		</div>
+	</body>
+</html>
